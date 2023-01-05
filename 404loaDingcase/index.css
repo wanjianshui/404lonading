@@ -1,0 +1,712 @@
+*{
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+html,body{
+    /* 水平垂直居中 */
+    /* 弹性布局 */
+    display: flex;
+    /* justify-conten定义x轴对齐方式 center水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* 最小高度为100vh vh相对视窗的高度 vw相对视窗的宽度  */
+    min-height: 100vh;
+    /* scale(.75)缩小 */
+    transform: scale(.75);
+
+    background: #ababfc;
+}
+
+/* 大盒子元素 */
+.all{
+    /* 固定定位 盒子元素不会随着滚动条而滚动 */
+    position: fixed;
+     /* justify-conten定义x轴对齐方式 center水平居中 */
+     justify-content: center;
+
+}
+/* 容器样式 */
+.bowl{
+    /* calc(50% -125px)固定像素 */
+    top: calc(50% -125px);
+    /* calc(50% -125px)固定像素 */
+    left: calc(50% -125px);
+    
+    width: 250px;
+    height: 250px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: rgba(90, 201, 226, 0.3);
+}
+
+/* 容器的影子 */
+/* 伪元素 在bowl前插入样式 */
+.bowl::before{
+    /* content: ""必须写 不写无法生效 */
+    content: "";
+
+    bottom: -25px;
+    left: 50px;
+    width: 150px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* 容器口 */
+/* 伪元素 在bowl后插入样式 */
+.bowl:after{
+     /* content: ""必须写 不写无法生效 */
+     content: "";
+      /* calc(25% - 3px固定像素 */
+     left: calc(25% - 3px);
+     
+     position: absolute;
+     top: 10px;
+     width: 50%;
+     height: 40px;
+     border: 3px solid #fff;
+     border-radius: 50%;
+}
+
+/* 容器中水的样式 */
+.bowl .water{
+    /* 超出部分隐藏 */
+    overflow: hidden;
+    /* 水的动画 匀速，ease中间快，两头慢 infinite无限循环*/
+    animation: innern 5s ease infinite;
+
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+}
+/* 水的动画 */
+@keyframes innern{
+    from {
+        /* rotate旋转0deg且不会改变原位置 默认选择x轴 */
+       transform: rotate(0deg);
+       margin-left: 0px;
+    }
+    25%{
+        transform: rotate(3deg);
+       margin-left: -3px;
+    }
+    50%{
+        transform: rotate(-6deg);
+        margin-left: 6px;
+    }
+    75%{
+        transform: rotate(5deg);
+        margin-left: -5px;
+    }
+    to{
+        ransform: rotate(0deg);
+        margin-left: 0px;
+    }
+}
+.bowl .water .inner{
+    position: absolute;
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+    bottom: 0;
+    left: 12.5px;
+    background: #5ab1f0;
+}
+/* 水的立体 */
+.bowl .to-water{
+    /* 添加动画 */
+    animation: top 5s ease infinite;
+
+    position: absolute;
+    width: 225px;
+    height: 60px;
+    border-radius: 50%;
+    bottom: 105px;
+    left: 12.5px;
+    background: #65bbf8;
+}
+/* 添加动画 */
+@keyframes top{
+    from {
+        /* rotate旋转0deg且不会改变原位置 默认选择x轴 */
+       transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(3deg);
+    }
+    50%{
+        transform: rotate(-6deg);
+    }
+    75%{
+        transform: rotate(5deg);
+    }
+    to{
+        ransform: rotate(0deg);
+    }
+}
+
+
+/* 人物样式 */
+.center-box{
+   /* 固定定位 盒子元素不会随着滚动条而滚动 */
+   position: fixed;
+   /* calc()固定像素 */ 
+   top: calc(50% - 250px);
+   left: calc(50% - 180px);
+   /* scale(.5)缩小0.5 */
+   transform: scale(0.5);
+   
+   width: 400px;
+   height: 400px;
+    /* 添加人物动画 */
+    animation:  float 5s ease infinite;
+}
+    /* 添加人物动画 */
+@keyframes float{
+    from {
+        transform: translate(0, 0px) scale(0.25);
+    }
+    25% {
+        transform: translate(0, 4px) scale(0.25);
+    }
+    50% {
+        transform: translate(0, -7px) scale(0.25);
+    }
+    75% {
+        transform: translate(0, 7px) scale(0.25);
+    }
+    to {
+        transform: translate(0, 0px) scale(0.25);
+    }
+}
+
+/* 渔民 */
+.fisherman{
+   width: 400px;
+   height: 300px;
+}
+/* 身体 */
+.fisherman .body{
+    /* 裁剪形状 */
+  clip-path: ellipse(40% 50% at 0% 50%);
+   /* 旋转-20deg */
+   transform: rotate(-20deg);
+
+  position: absolute;
+  width: 80px;
+  height: 150px;
+  bottom: 15px;
+  right: 40px;
+  background: #b2bd2c;
+}
+/* 在.fisherman 和.body的前面添加样式 */
+.fisherman .body:before{
+      /* content: ""必须写 不写无法生效 */
+      content: "";
+      clip-path: ellipse(90% 50% at 0% 50%);
+      /* 旋转10deg */
+      transform: rotate(10deg);
+
+      position: absolute;
+      width: 80px;
+      height: 200px;
+      bottom: -10px;
+      background: #d2bd24;
+      right: 15px;
+}
+/* 右胳膊 */
+.fisherman .right-arm{
+    /* 旋转40deg */
+    transform: rotate(40deg);
+    /* 圆 */
+    border-radius: 20px;
+
+    position: absolute;
+    width: 20px;
+    height: 110px;
+    bottom: 46px;
+    right: 163px;
+    transform: rotate(40deg);
+    border-radius: 20px;
+    background: #d2bd24;
+}
+/* 在.fisherman .right-arm前添加样式 */
+.fisherman .right-arm:before{
+    /* content: ""必须写 不写无法生效 */
+    content: '';
+
+    background: #ffd1b5;
+    border-radius: 20px;
+    right: 50px;
+    top: 82px;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+}
+/* 在.fisherman .right-arm后添加样式 */
+.fisherman .right-arm:after{
+    /* content: ""必须写 不写无法生效 */
+    content: '';
+    /* 左下角边框的形状 */
+    border-top-left-radius: 0px;
+    /* 右下角边框的形状 */
+    border-top-right-radius: 0px;
+
+    background: #d2bd24;
+    border-radius: 20px;
+    right: 20px;
+    bottom: -15px;
+    height: 50px;
+    width: 20px;
+    position: absolute;
+    transform: rotate(-80deg);
+    border-radius: 20px;
+}
+/* 右胳膊 */
+.fisherman .right-leg{
+    position: absolute;
+    width: 20px;
+    height: 110px;
+    border-radius: 20px;
+    bottom: -22px;
+    right: 159px;
+    background: red;
+    transform: rotate(-60deg);
+}
+/* 在.fisherman .right-leg后添加样式 */
+.fisherman .right-leg:before{
+     /* content: ""必须写 不写无法生效 */
+     content: '';
+
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    border-radius: 20px;
+    bottom: 45px;
+    left: -40px;
+    background: red;
+    transform: rotate(80deg);
+}
+/* 在.fisherman .right-leg前添加样式 */
+.fisherman .right-leg::after{
+     /* content: ""必须写 不写无法生效 */
+     content: '';
+
+   position: absolute;
+    width: 30px;
+    height: 100px;
+    border-radius: 20px;
+    bottom: 38px;
+    left: -75px;
+    background: #338ca0;
+    transform: rotate(80deg);
+}
+
+/* 鱼竿 */
+.rod{
+  position: absolute;
+  width: 380px;
+  height: 5px;
+  bottom: 130px;
+  left: -140px;
+  background: #7e370a;
+  transform: rotate(10deg);
+  
+}
+/* 鱼竿炳 */
+.rod .handle{
+  background: #efdddb;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  left: 310px;
+  top: 3px;
+}
+/* 在.rod .handle后插入样式 */
+.rod .handle::before{
+       /* content: ""必须写 不写无法生效 */
+    content: '';
+
+    position: absolute;
+    width: 13px;
+    height: 4px;
+    left: 10px;
+    top: 7px;
+    background: #1a1a1a;
+}
+/* 鱼线 */
+.rod .rope{
+  width: 3px;
+  height: 250px;
+  top: -18px;
+  left: 22px;
+  transform: rotate(-10deg);
+  background: #fff;
+  /* 添加动画 */
+  /* transform: ; */
+}
+.fisherman .butt{
+   position: absolute;   
+   width: 50px;
+   height: 20px;
+   border-radius: 20px;
+   bottom: 0;
+   right: 90px;
+   background: red;
+}
+/* 左胳膊 */
+.fisherman .left-arm{
+   position: absolute;
+   width: 20px;
+   height: 90px;
+   bottom: 55px;
+   right: 135px;
+   border-radius: 20px;
+   transform: rotate(30deg);
+   background: #e8d93d;
+}
+/* 在.fisherman .left-arm后插入样式 */
+.fisherman .left-arm::before{
+    content: '';
+
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 50px;
+    right: 53px;
+    border-radius: 20px;
+    /* transform: rotate(30deg); */
+    background: #ffd1b5;
+ }
+/* 在.fisherman .left-arm前插入样式 */
+.fisherman .left-arm::after{
+    content: '';
+
+    position: absolute;
+    width: 20px;
+    height: 60px;
+    bottom: -15px;
+    right: 20px;
+    border-radius: 20px;
+    transform: rotate(-70deg);
+    background: #e8d93d;
+ }
+
+ /* 左腿 */
+ .fisherman .left-leg{
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    bottom: -14px;
+    right: 120px;
+    border-radius: 20px;
+    transform: rotate(-50deg);
+    background: #de4125;
+ }
+ /* 在.fisherman .left-leg后插入样式 */
+ .fisherman .left-leg::before{
+    content: '';
+
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    bottom: 20px;
+    left: -37px;
+    border-radius: 20px;
+    transform: rotate(60deg);
+    background: #de4125;
+ }
+ /* 在.fisherman .left-leg前插入样式 */
+ .fisherman .left-leg::after{
+    content: '';
+
+    position: absolute;
+    width: 30px;
+    height: 100px;
+    bottom: 2px;
+    left: -78px;
+    border-radius: 20px;
+    transform: rotate(60deg);
+    background: #338ca0;
+ }
+
+ /* 头 */
+ .fisherman .head{
+   position: absolute;
+   width: 60px;
+   height: 80px;
+   bottom: 135px;
+   right: 110px;
+   border-radius: 50%;
+   transform: rotate(10deg);
+ }
+ .head .face{
+    /* 溢出隐藏 */
+    overflow: hidden;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #d76540;
+ }
+ /* 在.head .face后面插入样式 */
+ .head .face::before{
+    content: '';
+
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    top: -20px;
+    left: -10px;
+    border-radius: 50%;
+    background: #ffd1b5;
+    transform: rotate(-10deg);
+ }
+ .head .eyebrows{
+    position: absolute;
+    width: 15px;
+    height: 7px;
+    top: 15px;
+    left: -3px;
+    transform: rotate(-10deg);
+    background: #e67e5b;
+ }
+/* 在.head .eyebrows后插入样式 */
+.head .eyebrows::before{
+    content: '';
+
+    position: absolute;
+    width: 20px;
+    height: 7px;
+    top: 0px;
+    left: 22px;
+    /* transform: rotate(-10deg); */
+    background: #e67e5b;
+ }
+.head .eyes{
+   position: absolute;
+   width: 5px;
+   height: 8px;
+   top: 25px;
+   left: 6px;
+   border-radius: 50%;
+   transform: rotate(-10deg);
+   background: #1a1a1a;
+}
+/* 在.head .eyes后面插入样式 */
+.head .eyes::before{
+    content: '';
+
+    position: absolute;
+    width: 5px;
+    height: 8px;
+    top: 0px;
+    left: 20px;
+    border-radius: 50%;
+    /* transform: rotate(-10deg); */
+    background: #1a1a1a;
+ }
+ .head .nose{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-right: 15px solid #fab58e;
+    top: 25px;
+    left: 6px;
+    transform: rotate(-10deg);
+ }
+ .head .beard{
+    position: absolute;
+    background: #e67e5b;
+    width: 20px;
+    height: 6px;
+    top: 50px;
+    left: 10px;
+    transform: rotate(-10deg);
+    clip-path: ellipse(50% 50% at 50% 50%);
+ }
+ .head .hat{
+    position: absolute;
+    width: 70px;
+    height: 8px;
+    top: 8px;
+    left: -13px;
+     border-radius: 20px;
+    background: #7b8445;
+ }
+ /* 在.head .hat后面插入样式 */
+ .head .hat::before{
+    content: '';
+
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    left: 10px;
+    bottom: 8px;
+    clip-path: ellipse(50% 50% at 50% 90%);
+    background: #7b8445;
+ }
+
+ /* 船 */
+ .boat{
+     width: 400px;
+     height: 100px;
+     margin-top: -15px;
+     margin-left: -27px
+ }
+ .boat .motor{
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    top: -50px;
+    right: -370px;
+    background: #ef4723;
+ }
+ /* 在.boat .motor后添加样式 */
+ .boat .motor::before{
+    content: '';
+
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    clip-path: polygon(0 0, 100% 0, 60% 100%, 0% 100%);
+    top: 55px;
+    right: 20px;
+    z-index: -1;
+    background: #bf3526;
+ }
+ /* 在.boat .motor前添加样式 */
+ .boat .motor::after{
+    content: '';
+
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    left: 0;
+    top: 0;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    background: #fff;
+ }
+.boat .motor .parts,
+.boat .motor .parts::before,
+.boat .motor .parts::after {
+    position: absolute;
+    width: 25px;
+    height: 5px;
+    right: 10px;
+    top: 30px;
+    border-radius: 20px;
+    background: #bf3526;
+}
+.boat .motor .parts::before,
+.boat .motor .parts::after {
+    content: '';
+
+    right: 0px;
+}
+.boat .motor .parts::before{
+    top: 10px;
+}
+.boat.motor .parts::after{
+    top: 20px;
+}
+/* 扳手 */
+.boat .motor .button {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    left: -10px;
+    top: 25px;
+    border-radius: 20px;
+    background: #bf3526;
+}
+.boat .top{
+    position: absolute;
+    width: 390px;
+    height: 5px;
+    top: 0;
+    right: 0;
+    border-bottom: solid #cdab33;
+    background: #e8da43;
+}
+.boat .boat-body{
+    position: absolute;
+    width: 380px;
+    height: 90px;
+    bottom: 0;
+    right: 0;
+    border-bottom-left-radius: 90px;
+    border-bottom-right-radius: 20px;
+    clip-path: polygon(0 0, 100% 0, 99% 100%, 0% 100%);
+    background: #cdab33;
+}
+/* 在.boat .boat-body后添加样式 */
+.boat .boat-body::before{
+    content: '';
+
+    position: absolute;
+    width: 380px;
+    height: 70px;
+    bottom: 20px;
+    right: 0px;
+    border-bottom-left-radius: 60px;
+    background: #d2bd39;
+}
+/* 在.boat .boat-body前添加样式 */
+.boat .boat-body::after{
+    content: '';
+
+    position: absolute;
+    width: 380px;
+    height: 40px;
+    bottom: 50px;
+    right: 0px;
+    border-bottom-left-radius: 60px;
+    background: #e8da43;
+}
+/* 波纹 */
+.waves{
+     /* 上下立体 */
+    z-index: -10;
+    /* 添加动画 */
+    animation: waves 5s ease infinite;
+
+    height: 100%;
+    box-sizing: border-box;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    transform: translate(30px, -30px);
+}
+@keyframes waves {
+    from {
+        margin-left: 0px;
+        margin-right: 0px;
+        border-color: #fff;
+    }
+    to {
+        margin-left: -100px;
+        margin-right: -100px;
+        border-color: transparent;
+    }
+}
+h1{
+    position: fixed;
+    color: rgba(0, 0, 0, 0.15);
+    width: 100%;
+    top: calc(50% + 170px);
+    right: 80px;
+    text-align: center;
+    font-size: 40px;
+}
+
+
+
